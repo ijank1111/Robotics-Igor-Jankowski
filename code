@@ -1,15 +1,18 @@
-x = 0
-startX = 0
 lap = 0
-y = 0
+startX = 0
 startY = 0
 rightDist = 0
 frontDist = 0
 leftDist = 0
 
 def when_started1():
-    global x, startX, lap, y, startY, rightDist, frontDist, leftDist
+    global lap, startX, startY, rightDist, frontDist, leftDist
+    pen.set_pen_width(THIN)
+    pen.set_pen_color(BLUE)
+    pen.move(DOWN)
     lap = 0
+    startX = location.position(X, MM)
+    startY = location.position(Y, MM)
     drivetrain.set_drive_velocity(180, PERCENT)
     drivetrain.set_turn_velocity(180, PERCENT)
     drivetrain.set_timeout(1, SECONDS)
@@ -34,18 +37,9 @@ def when_started1():
             wait(0.1, SECONDS)
         else:
             drivetrain.turn_for(RIGHT, 180, DEGREES)
-    lap = 1
-    pen.set_pen_width(THIN)
-    pen.set_pen_color(BLUE)
-    pen.move(DOWN)
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 250, MM)
-    while not lap == 2:
-        if down_eye.detect(RED):
-            lap = lap + 1
-            wait(1, SECONDS)
-        if False:
-            pass
+    while not down_eye.detect(RED):
         drivetrain.turn_for(RIGHT, 90, DEGREES)
         rightDist = front_distance.get_distance(MM)
         drivetrain.turn_for(LEFT, 90, DEGREES)
