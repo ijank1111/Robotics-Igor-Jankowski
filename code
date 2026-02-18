@@ -1,12 +1,40 @@
-lap = 0
-startX = 0
-startY = 0
+#region VEXcode Generated Robot Configuration
+import math
+import random
+from vexcode_vr import *
+
+# Brain should be defined by default
+brain=Brain()
+
+drivetrain = Drivetrain("drivetrain", 0)
+pen = Pen("pen", 8)
+pen.set_pen_width(THIN)
+left_bumper = Bumper("leftBumper", 2)
+right_bumper = Bumper("rightBumper", 3)
+front_eye = EyeSensor("frontEye", 4)
+down_eye = EyeSensor("downEye", 5)
+front_distance = Distance("frontdistance", 6)
+distance = front_distance
+magnet = Electromagnet("magnet", 7)
+location = Location("location", 9)
+
+#endregion VEXcode Generated Robot Configuration
+myVariable = 0
+CELL = 0
+x = 0
+y = 0
 rightDist = 0
 frontDist = 0
 leftDist = 0
+startX = 0
+startY = 0
+curX = 0
+curY = 0
+lap = 0
+far = 0
 
 def when_started1():
-    global lap, startX, startY, rightDist, frontDist, leftDist
+    global myVariable, CELL, x, y, rightDist, frontDist, leftDist, startX, startY, curX, curY, lap, far
     pen.set_pen_width(THIN)
     pen.set_pen_color(BLUE)
     pen.move(DOWN)
@@ -37,6 +65,7 @@ def when_started1():
             wait(0.1, SECONDS)
         else:
             drivetrain.turn_for(RIGHT, 180, DEGREES)
+        wait(2, MSEC)
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 250, MM)
     while not down_eye.detect(RED):
@@ -60,5 +89,6 @@ def when_started1():
             wait(0.1, SECONDS)
         else:
             drivetrain.turn_for(RIGHT, 180, DEGREES)
+        wait(2, MSEC)
 
 vr_thread(when_started1)
