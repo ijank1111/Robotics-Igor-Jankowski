@@ -1,15 +1,15 @@
+x = 0
 startX = 0
 lap = 0
+y = 0
 startY = 0
 rightDist = 0
 frontDist = 0
 leftDist = 0
 
 def when_started1():
-    global startX, lap, startY, rightDist, frontDist, leftDist
+    global x, startX, lap, y, startY, rightDist, frontDist, leftDist
     lap = 0
-    startX = location.position(X, MM)
-    startY = location.position(Y, MM)
     drivetrain.set_drive_velocity(180, PERCENT)
     drivetrain.set_turn_velocity(180, PERCENT)
     drivetrain.set_timeout(1, SECONDS)
@@ -41,11 +41,11 @@ def when_started1():
     drivetrain.turn_for(RIGHT, 180, DEGREES)
     drivetrain.drive_for(FORWARD, 250, MM)
     while not lap == 2:
-        if front_distance.get_distance(MM) == 1500:
-            drivetrain.turn_for(LEFT, 90, DEGREES)
         if down_eye.detect(RED):
             lap = lap + 1
             wait(1, SECONDS)
+        if False:
+            pass
         drivetrain.turn_for(RIGHT, 90, DEGREES)
         rightDist = front_distance.get_distance(MM)
         drivetrain.turn_for(LEFT, 90, DEGREES)
@@ -66,7 +66,5 @@ def when_started1():
             wait(0.1, SECONDS)
         else:
             drivetrain.turn_for(RIGHT, 180, DEGREES)
-    while not down_eye.detect(GREEN):
-        pass
 
 vr_thread(when_started1)
